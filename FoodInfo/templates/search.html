@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{% block content %}
+
+    {% if not tables %}
+    <h1>검색 결과가 없습니다.</h1>
+    {% else %}
+        <form action="{% url 'FoodInfo:addTodayFood' %}" method="POST" >
+            {% csrf_token %}
+        <table>
+            <thead>
+                <tr>
+                    <th>음식 체크</th>
+                    <th>음식 이름</th>
+                    <th>중량</th>
+                    <th>칼로리</th>
+                    <th>탄수화물</th>
+                    <th>단백지</th>
+                    <th>지방</th>
+                </tr>
+        </thead>
+         <tbody>
+            {% for table in tables.all %}
+                <tr>
+                    <td><input type="checkbox" name="val_id" value={{ table.index }}></td>
+                    <td>{{ table.name }}</td>
+                    <td>{{ table.serving_wt }}</td>
+                    <td>{{ table.kcal }}</td>
+                    <td>{{ table.carbo }}</td>
+                    <td>{{ table.protein }}</td>
+                    <td>{{ table.fat }}</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% endif %}
+
+
+<br>
+<input type="button" value="이 음식 체크" id='btnSend' onClick="btnCheck()">
+</form>
+
+
+
+<script>
+    function btnCheck() {
+        alert($('input[type=checkbox]:checked').val())
+    }
+
+</script>
+
+
+{% endblock %}

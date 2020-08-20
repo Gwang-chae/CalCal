@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{% block content %}
+<h1>서비스</h1>
+
+
+<form action="{% url 'FoodInfo:search' %}" method="POST" >
+  {% csrf_token %}
+  <input type="search"
+         placeholder="Search"
+         name="q" value="{{ q }}">
+  <a href="{% url 'FoodInfo:search' %}"><button type="submit">Search</button></a>
+</form>
+
+
+<br><br>
+<table>
+    <thead>
+    <tr>
+        <th>음식 체크</th>
+                <th>음식 이름</th>
+                <th>중량</th>
+                <th>칼로리</th>
+                <th>탄수화물</th>
+                <th>단백지</th>
+        <th>지방</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+
+
+
+
+
+{% endblock %}
